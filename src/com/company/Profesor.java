@@ -1,43 +1,31 @@
 package com.company;
 
+import java.util.ArrayList;
+
 public class Profesor extends Thread{
 
-    public void run(){
-            //try {
-                synchronized (Main.alumnos){
-                    int cont=0;
-                    for(int i=0;i<10;i++){
-                        Alumno al = new Alumno();
-                        al.setName("Alumno "+i);
-                        al.start();
+    public synchronized void run(){
+            try {
+
+                sleep(5000);
+                System.out.println("======Empiezo la primera desinfeccion======");
+                notifyAll();
 
 
-                        //Main.alumnos.wait();
-                        cont= al.cont+cont;
-                        Main.alumnos.add(al);
-                        Main.alumnos.notify();
-
-
-                    }
-                    Main.desinfeccion(cont);
-                    Main.alumnos.notify();
-                    for(Alumno al1:Main.alumnos){
-                        try {
-                            al1.join();
-
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    //Main.alumnos.wait();
+                sleep(31000);
+                System.out.println("======Empiezo la segunda desinfeccion======");
+                notifyAll();
 
 
 
-                }
-            //} catch (InterruptedException e) {
-                //e.printStackTrace();
-            //}
+
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
     }
+
+
 
 }
